@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css"/>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>-->
+    <script src="../node_modules/angular/angular.js"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+<h1>Choose Your Tux</h1>
+<div class="wrapper" ng-controller="StoreController as store">
+    <div ng-controller="ProductsController">
+        <div ng-controller="PageController">
+            <div class="buttons">
+                <button class="but" ng-click="Myprice = 'price'">Price<span>↑</span></button>
+                <button class="but" ng-click="Myprice = '-price'">Price<span>↓</span></button>
+                <button class="but" ng-class="{ active: layout == 'list' }" ng-click="layout = 'list'">List</button>
+                <button class="but" ng-class="{ active: layout == 'grid' }" ng-click="layout = 'grid'">Grid</button>
+            </div>
+            <div class="grid" ng-show="layout == 'grid'">
+                <div class="products">
+                    <div ng-repeat-start="product in store.products | orderBy:Myprice" class="product">
+                        <div class="wrapp-desc">
+                            <div>
+                                <img ng-src="{{ product.photo }}">
+                            </div>
+                            <div class="desc-grid">
+                                <h2> <!--{{ $index + 1 }}.--> {{ product.name }}</h2>
+                            </div>
+                            <div class="desc-grid">
+                                <h2>${{ product.price }}</h2>
+                            </div>
+                        </div>
+                        <div class="wrapp-desc" ng-controller="DescriptionController as description">
+
+
+                            <ul class="navigation">
+                                <li ng-class="{ active: description.isSelected(1) }">
+                                    <a href ng-click="description.selectTab(1)">Description</a>
+                                </li>
+                                <li ng-class="{ active: description.isSelected(2) }">
+                                    <a href ng-click="description.selectTab(2)">Specifications</a>
+                                </li>
+                                <li ng-class="{ active: description.isSelected(3) }">
+                                    <a href ng-click="description.selectTab(3)">Reviews</a>
+                                </li>
+                            </ul>
+
+                            <div class="panel" ng-show="description.isSelected(1)">
+                                <div class="panel-body">
+                                    <blockquote>{{ product.description }}</blockquote>
+                                </div>
+                            </div>
+                            <div class="panel" ng-show="description.isSelected(2)">
+                                <div class="panel-body">
+                                    <blockquote>Specifications</blockquote>
+                                </div>
+                            </div>
+                            <div class="panel" ng-show="description.isSelected(3)">
+                                <div class="panel-body">
+                                    <div class="visible">
+                                        <blockquote ng-repeat="review in product.reviews">
+                                            <div>
+                                                <b>{{ review.stars }} Stars:</b>
+                                            </div>
+                                            <div class="message">
+                                                {{ review.body }}
+                                            </div>
+                                            <div class="mail">
+                                                <i>{{ review.author }}</i>
+                                            </div>
+                                            <div class="data">
+                                                {{ review.date | date:'dd-MM-yyyy h:mm:ss a' }}
+                                            </div>
+                                            <hr>
+                                        </blockquote>
+                                    </div>
+
+                                    <form class="form" name="reviewForm" ng-controller="ReviewController as reviewCtrl"
+                                          ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
+
+                                        <fieldset class="form-group">
+                                        <select class="form-control" ng-model="reviewCtrl.review.stars"
+                                        ng-options="stars for stars in [5,4,3,2,1]" required>
+                                        <option class="stars" value="">Rate the product</option>
+                                        </select>
+                                        </fieldset>
+
+                                        <fieldset class="form-group">
+                                <textarea
+                                        class="form-control"
+                                        ng-model="reviewCtrl.review.body"
+                                        placeholder="Write a short review of the product..."
+                                        required>
+                                </textarea>
+                                        </fieldset>
+
+                                        <fieldset class="form-group">
+                                            <input
+                                                    class="form-control"
+                                                    ng-model="reviewCtrl.review.author"
+                                                    type="email"
+                                                    placeholder="email@example.org"
+                                                    required
+                                            />
+                                        </fieldset>
+
+                                        <fieldset class="form-group">
+                                            <input class="btn" type="submit" value="Submit"/>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                            <div ng-class="{ active: description.isSelected(3) }">
+                                <button class="buy buy-grid" ng-hide="description.isSelected(3)">Buy</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <hr style="display: none" ng-repeat-end ng-hide="$last"/>
+                </div>
+            </div>
+
+
+            <div class="list" ng-show="layout == 'list'">
+                <div class="show-list">
+                    <div ng-repeat-start="product in store.products | orderBy:Myprice" class="product-list">
+                        <div class="desc-list">
+                            <img ng-src="{{ product.photo }}" class="img-list">
+                        </div>
+                        <div class="desc-list">
+                            <h3> <!--{{ $index + 1 }}.--> {{ product.name }}</h3>
+                        </div>
+                        <div class="desc-list">
+                            <h4>${{ product.price }}</h4>
+                        </div>
+                        <div class="desc-list">
+                            <p>{{ product.description }}</p>
+                        </div>
+                        <div class="desc-list">
+                            <button class="buy buy-list" ng-show="product.canPurchase">Buy</button>
+                        </div>
+                    </div>
+                    <hr ng-repeat-end ng-hide="$last"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<script src="../node_modules/angular/angular.js"></script>-->
+</body>
+</html>
