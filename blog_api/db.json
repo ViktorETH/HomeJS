@@ -1,0 +1,89 @@
+{
+  "posts": [
+    {
+      "title": "Почему он используется?",
+      "body": "Давно выяснено, что при оценке дизайна и композиции читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому, что тот обеспечивает более или менее стандартное заполнение шаблона, а также реальное распределение букв и пробелов в абзацах, которое не получается при простой дубликации \"Здесь ваш текст.. Здесь ваш текст.. Здесь ваш текст..\" Многие программы электронной вёрстки и редакторы HTML используют Lorem Ipsum в качестве текста по умолчанию, так что поиск по ключевым словам \"lorem ipsum\" сразу показывает, как много веб-страниц всё ещё дожидаются своего настоящего рождения. За прошедшие годы текст Lorem Ipsum получил много версий. Некоторые версии появились по ошибке, некоторые - намеренно (например, юмористические варианты).",
+      "author": "Ivan",
+      "date": "2019-01-20T22:40:52.035Z",
+      "id": 1
+    },
+    {
+      "title": "Что такое Lorem Ipsum?",
+      "body": "Lorem Ipsum - это текст-\"рыба\", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной \"рыбой\" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.",
+      "author": "Kolya",
+      "date": "2019-01-20T22:41:37.938Z",
+      "id": 2
+    },
+    {
+      "title": "Откуда он появился?",
+      "body": "Многие думают, что Lorem Ipsum - взятый с потолка псевдо-латинский набор слов, но это не совсем так. Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, \"consectetur\", и занялся его поисками в классической латинской литературе. В результате он нашёл неоспоримый первоисточник Lorem Ipsum в разделах 1.10.32 и 1.10.33 книги \"de Finibus Bonorum et Malorum\" (\"О пределах добра и зла\"), написанной Цицероном в 45 году н.э. Этот трактат по теории этики был очень популярен в эпоху Возрождения. Первая строка Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", происходит от одной из строк в разделе 1.10.32\n\nКлассический текст Lorem Ipsum, используемый с XVI века, приведён ниже. Также даны разделы 1.10.32 и 1.10.33 \"de Finibus Bonorum et Malorum\" Цицерона и их английский перевод, сделанный H. Rackham, 1914 год.",
+      "author": "Sasha",
+      "date": "2019-01-20T22:42:30.256Z",
+      "id": 3
+    },
+    {
+      "title": "Lorem Ipsum",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin rutrum vulputate cursus. Vestibulum id dictum turpis. Vestibulum iaculis, nibh et gravida sollicitudin, arcu tortor congue mi, vel egestas odio nulla at eros. Cras rutrum fringilla odio ac iaculis. Cras lacinia eu mauris vitae blandit. Mauris fringilla consequat fringilla. Nulla rutrum elementum eros, eu rhoncus tellus rutrum in. Mauris porttitor, lectus id fringilla accumsan, ante nunc aliquam nunc, vitae tempor lorem dui a felis. Donec semper semper ligula et porta. Fusce cursus, sem cursus luctus egestas, metus quam dapibus turpis, eu euismod lectus enim a justo. Maecenas convallis leo nec odio efficitur, varius tempor tortor molestie. Quisque non dui eu tortor accumsan iaculis. Pellentesque cursus tempor metus, nec sagittis ipsum ultricies in. Sed sit amet efficitur ligula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.\n\nUt rutrum est eu dolor elementum bibendum. Pellentesque euismod in nunc sed vestibulum. Aenean dolor magna, luctus sed lacinia eu, sollicitudin et purus. Integer ut cursus ipsum. Donec ut libero ac nunc cursus gravida id vitae nisl. Donec ex nisl, suscipit quis aliquam vitae, laoreet vitae nisl. Vestibulum mollis felis eu lacinia bibendum. In dictum tellus vel urna vestibulum lobortis. Curabitur et erat vitae lorem porttitor pretium vel non arcu. Mauris vestibulum commodo mauris nec dictum. Nulla vulputate scelerisque elit, auctor consectetur sapien eleifend nec. Nulla finibus sagittis libero vitae rhoncus. Nullam egestas nisl lorem, ut faucibus risus convallis at. Phasellus rhoncus lectus et lacus auctor eleifend. Quisque id enim euismod.",
+      "author": "Nastya",
+      "date": "2019-01-20T22:44:24.153Z",
+      "id": 4
+    },
+    {
+      "title": "Lorem",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin rutrum vulputate cursus. Vestibulum id dictum turpis. Vestibulum iaculis, nibh et gravida sollicitudin, arcu tortor congue mi, vel egestas odio nulla at eros. Cras rutrum fringilla odio ac iaculis. Cras lacinia eu mauris vitae blandit. Mauris fringilla consequat fringilla. Nulla rutrum elementum eros, eu rhoncus tellus rutrum in. Mauris porttitor, lectus id fringilla accumsan, ante nunc aliquam nunc, vitae tempor lorem dui a felis. Donec semper semper ligula et porta. Fusce cursus, sem cursus luctus egestas, metus quam dapibus turpis, eu euismod lectus enim a justo. Maecenas convallis leo nec odio efficitur, varius tempor tortor molestie. Quisque non dui eu tortor accumsan iaculis. Pellentesque cursus tempor metus, nec sagittis ipsum ultricies in. Sed sit amet efficitur ligula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+      "author": "Nataha",
+      "date": "2019-01-20T22:52:49.847Z",
+      "id": 5
+    }
+  ],
+  "comments": [
+    {
+      "postId": 4,
+      "body": "WebKit Browsers will clamp the number of lines \n  in this paragraph to 2. Lorem ipsum dolor sit amet, \n  consectetur adipisicing elit, sed do eiusmod tempor \n  incididunt ut labore et dolore magna aliqua. Ut enim \n  ad minim veniam, quis nostrud exercitation ullamco \n  laboris nisi ut aliquip ex ea commodo consequat. Duis \n  aute irure dolor in reprehenderit in voluptate velit \n  esse cillum dolore eu fugiat nulla pariatur. Excepteur \n  sint occaecat cupidatat non proident, sunt in culpa qui \n  officia deserunt mollit anim id est laborum.",
+      "date": "2019-01-20T23:11:34.669Z",
+      "id": 1
+    },
+    {
+      "postId": 4,
+      "body": "Ut rutrum est eu dolor elementum bibendum. Pellentesque euismod in nunc sed vestibulum. Aenean dolor magna, luctus sed lacinia eu, sollicitudin et purus. Integer ut cursus ipsum. Donec ut libero ac nunc cursus gravida id vitae nisl. Donec ex nisl, suscipit quis aliquam vitae, laoreet vitae nisl. Vestibulum mollis felis eu lacinia bibendum. In dictum tellus vel urna vestibulum lobortis. Curabitur et erat vitae lorem porttitor pretium vel non arcu. Mauris vestibulum commodo mauris nec dictum. Nulla vulputate scelerisque elit, auctor consectetur sapien eleifend nec. Nulla finibus sagittis libero vitae rhoncus. Nullam egestas nisl lorem, ut faucibus risus convallis at. Phasellus rhoncus lectus et lacus auctor eleifend. Quisque id enim euismod.\n\n",
+      "date": "2019-01-20T23:18:45.204Z",
+      "id": 2
+    },
+    {
+      "postId": 4,
+      "body": "WebKit Browsers will clamp the number of lines \n  in this paragraph to 2. Lorem ipsum dolor sit amet, \n  consectetur adipisicing elit, sed do eiusmod tempor \n  incididunt ut labore et dolore magna aliqua. Ut enim \n  ad minim veniam, quis nostrud exercitation ullamco \n  laboris nisi ut aliquip ex ea commodo consequat. Duis \n  aute irure dolor in reprehenderit in voluptate velit \n  esse cillum dolore eu fugiat nulla pariatur. Excepteur \n  sint occaecat cupidatat non proident, sunt in culpa qui \n  officia deserunt mollit anim id est laborum.",
+      "date": "2019-01-20T23:26:17.317Z",
+      "id": 3
+    },
+    {
+      "postId": 4,
+      "body": "",
+      "date": "2019-01-20T23:26:33.828Z",
+      "id": 4
+    },
+    {
+      "postId": 4,
+      "body": "",
+      "date": "2019-01-20T23:29:08.457Z",
+      "id": 5
+    },
+    {
+      "postId": 4,
+      "body": "",
+      "date": "2019-01-20T23:29:55.649Z",
+      "id": 6
+    },
+    {
+      "postId": 4,
+      "body": "",
+      "date": "2019-01-20T23:29:55.649Z",
+      "id": 7
+    },
+    {
+      "postId": 2,
+      "body": "sdsdsdvsdvsdvsdvsdvsdvsdvsdv",
+      "date": "2019-01-20T23:59:47.949Z",
+      "id": 8
+    }
+  ]
+}
