@@ -12,10 +12,10 @@ a {
 
 .post-list__wrapper {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
-    justify-content: space-evenly;
-    background-image: linear-gradient(to bottom right, #AFEEEE, #66CDAA);
+    justify-content: flex-start;
+    background-image: linear-gradient(to right, black, #2A3340, black);
     min-height: 90vh;
 }
 

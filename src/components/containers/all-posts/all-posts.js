@@ -2,17 +2,32 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {fetchAllPosts} from '../../../actions/allPosts';
 import PostItem from '../../presentational/post-item/postItem';
+import {getAllPosts} from "../../../helpers/selectors";
+import {Grid} from '@material-ui/core';
 
-const PostsList = ({ posts }) => {
+const styles = {
+	'background-image': 'linear-gradient(to right, black, #2A3340, black)',
+	'min-height': '100vh'
+};
+
+const PostsList = ({posts}) => {
 	const list = posts.map((post) =>
-			<PostItem post={post}  key={post.id}/>
+		<PostItem post={post} key={post.id}/>
 	);
 	return (
-		<div className={'post-list__wrapper'}>{list}</div>
+		<Grid
+			container
+			direction="row"
+			justify="space-evenly"
+			style={styles}
+			alignItems="flex-start">
+			{list}
+		</Grid>
 	);
 };
 
 class Posts extends Component {
+
 	componentDidMount () {
 		this.props.fetchAllPosts();
 	}
@@ -28,7 +43,7 @@ class Posts extends Component {
 
 const mapStateToProps = state => {
 	return {
-		posts: state.posts.posts
+		posts: getAllPosts(state)
 	}
 };
 

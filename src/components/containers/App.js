@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Posts from './all-posts/all-posts';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import Header from "../presentational/header/header";
+import Header from "./header/header";
 import styled from "styled-components";
 import Post from "./post/post";
 import CreatePost from "../presentational/createPost/create-post";

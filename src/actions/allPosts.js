@@ -1,7 +1,7 @@
 import {
 	FETCH_ALL_POSTS_ERROR,
 	FETCH_ALL_POSTS_START,
-	FETCH_ALL_POSTS_SUCCESS,
+	FETCH_ALL_POSTS_SUCCESS, SEARCH_POSTS,
 } from '../helpers/constantTypes';
 import {getAllPosts} from '../api/posts';
 
@@ -27,3 +27,10 @@ export function fetchAllPosts () {
 			});
 	}
 }
+
+export const searchPosts = value => dispatch => {
+	dispatch({
+		type: SEARCH_POSTS,
+		payload: value
+	})
+};

@@ -1,63 +1,90 @@
 import React, {Component} from 'react';
 import {createPost} from '../../../api/posts'
+import PropTypes from 'prop-types';
 import styled from "styled-components";
+import {withStyles} from '@material-ui/core/styles';
+import {TextField, Button, InputLabel, Select, MenuItem} from "@material-ui/core";
+import {green} from '@material-ui/core/colors';
+import FileBase64 from 'react-file-base64';
 
 const TitlePost = styled.h2`
   font-size: 2.5em;
-  margin: 2%;
-  color: #3a3a3a;
+  margin: 1%;
+  color: #FFF;
   text-align: center;
+  text-shadow: 1px 1px 2px black
 `;
 
-const Input = styled.input`
-	margin: 0 auto;
-	width: 100%;
-	height: 30px;
-	font-size: 20px;
-	border-radius: 5px;
-  border: none;
-  box-shadow: 1px 1px 5px 1px #cecece;
-  padding-left: 2%
+const ButtonWrapper = styled.div`
+  position: relative;
 `;
 
-const TextAtea = styled.textarea`
-	margin: 0 auto;
-  width: 100%;
-  font-size: 20px;
-  border-radius: 5px;
-  border: none;
-  box-shadow: 1px 1px 5px 1px #cecece;
-
-`;
-
-const Form = styled.form`
-	margin: 0 auto;
-  width: 50%;
-`;
-
-const Button = styled.button`
-	margin: 0 auto;
-  width: 50%;
-  display: inline-block;
-  color: #40E0D0;
-  font-size: 1em;
-  margin-top: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid #4682B4;
-  border-radius: 3px;
-  display: block;
-`;
+const styles = theme => ({
+	container: {
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center',
+		width: 700,
+		margin: '2% auto',
+		padding: 10,
+		background: '#2A2B32',
+		boxShadow: '1px 1px 10px 1px #3E3F42',
+		borderRadius: 5
+	},
+	textField: {
+		marginLeft: theme.spacing.unit,
+		marginRight: theme.spacing.unit,
+		width: 700,
+		marginBottom: 5,
+		color: '#FFF',
+	},
+	button: {
+		fontSize: 12,
+		width: 200,
+		margin: 5,
+	},
+	success: {
+		color: green[500],
+		margin: 20
+	},
+	buttonProgress: {
+		color: green[500],
+		position: 'absolute',
+		top: '50%',
+		left: '50%',
+		marginTop: -12,
+		marginLeft: -12,
+	},
+	error: {
+		color: 'red'
+	},
+	labelStyle: {
+		margin: 10
+	},
+	selectList: {
+		width: '30%'
+	}
+});
 
 class CreatePost extends Component {
 	state = {
 		title: '',
 		body: '',
 		author: '',
-		date: new Date()
+		category: 'first',
+		date: new Date(),
+		loading: false,
+		success: false,
+		error: false,
+		categories: ['first', 'second', 'third'],
+		files: []
 	};
 
 	handleChangeValue = (event) => {
 		this.setState({title: event.target.value});
+	};
+	handleChangeCategory = (event) => {
+		this.setState({category: event.target.value});
 	};
 	handleChangeBody = (event) => {
 		this.setState({body: event.target.value});
@@ -65,42 +92,127 @@ class CreatePost extends Component {
 	handleChangeAuthor = (event) => {
 		this.setState({author: event.target.value});
 	};
+	handleLoadFiles = (files) => {
+		this.setState({ files: files })
+	};
 
 	handleSubmit = (event) => {
 		event.preventDefault();
-		createPost(this.state).then(res => console.log(res)).catch(err => console.log(err))
+		const {title, body, author, date, category, files} = this.state;
+		const form = {
+			title,
+			body,
+			author,
+			date,
+			category,
+			files
+		};
 		this.setState({
-			title: '',
-			body: '',
-			author: '',
-		})
+			loading: true
+		});
+		createPost(form)
+			.then(res => {
+				if (res.status === 201) {
+					this.setState({
+						success: true,
+						loading: false,
+						title: '',
+						body: '',
+						author: '',
+					});
+					setTimeout(() => {
+						this.setState({
+							success: false,
+						});
+					}, 2000);
+				} else {
+					this.setState({
+						error: true
+					});
+					setTimeout(() => {
+						this.setState({
+							error: false,
+						});
+					}, 2000);
+				}
+			})
+			.catch(err => console.log('err', err));
 	};
 
 	render () {
+		const {classes} = this.props;
 		return (
 			<div className={'post-list__wrapper'}>
-				<Form onSubmit={this.handleSubmit}>
-					<TitlePost>Create post</TitlePost>
-					<label>
-						Title:
-						<Input type="text" value={this.state.title} onChange={this.handleChangeValue}/>
-					</label>
-					<br/>
-					<label>
-						Body:
-						<TextAtea rows="10" type="text" value={this.state.body} onChange={this.handleChangeBody}/>
-					</label>
-					<br/>
-					<label>
-						Author:
-						<Input type="text" value={this.state.author} onChange={this.handleChangeAuthor}/>
-					</label>
-					<br/>
-					<Button type="submit" value="Submit" onSubmit={this.handleSubmit}>Create post</Button>
-				</Form>
+				<TitlePost>Create post</TitlePost>
+				<form className={classes.container} onSubmit={this.handleSubmit}>
+					<FileBase64
+						multiple={ false }
+						onDone={ this.handleLoadFiles } />
+					<div>
+						<TextField
+							id="title"
+							label="Title"
+							className={classes.textField}
+							type="text"
+							required={true}
+							value={this.state.title}
+							fullWidth
+							onChange={this.handleChangeValue}/>
+						<InputLabel
+							htmlFor="age-simple"
+							className={classes.labelStyle}>Category</InputLabel>
+						<Select
+							value={this.state.category}
+							onChange={this.handleChangeCategory}
+							className={classes.selectList}
+							inputProps={{ name: 'category' }}>
+							{
+								this.state.categories.map(category => (
+									<MenuItem value={category}>{category}</MenuItem>
+								))
+							}
+						</Select>
+					</div>
+					<TextField
+						id="post"
+						label="Post"
+						className={classes.textField}
+						multiline={true}
+						required={true}
+						rows="10"
+						value={this.state.body}
+						fullWidth
+						onChange={this.handleChangeBody}/>
+					<TextField
+						id="author"
+						label="Author"
+						className={classes.textField}
+						type="text"
+						value={this.state.author}
+						required={true}
+						fullWidth
+						onChange={this.handleChangeAuthor}/>
+					<ButtonWrapper>
+						<Button
+							variant="contained"
+							color="primary"
+							type="submit"
+							disabled={this.state.loading}
+							onSubmit={this.handleSubmit}
+							className={classes.button}>
+							Create post
+						</Button>
+						{this.state.success && <span className={classes.success}>Success</span>}
+						{this.state.error && <span className={classes.error}>Oops</span>}
+					</ButtonWrapper>
+				</form>
 			</div>
 		);
 	}
 }
 
-export default CreatePost;
+CreatePost.propTypes = {
+	classes: PropTypes.object
+};
+
+export default withStyles(styles)(CreatePost);

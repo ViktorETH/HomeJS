@@ -6,11 +6,10 @@ import CreateComment from '../../presentational/create-comment/createComment';
 import styled from "styled-components";
 
 const PostWrapper = styled.div`
-	width: 80%;
+	width: 70%;
 	min-height: 100vh;
 	background-color: #fff;
-	margin: 2%;
-	box-shadow: 1px 1px 50px 10px #cecece;
+	margin: 2% 5%;
 `;
 
 const TitlePost = styled.h2`
@@ -39,16 +38,22 @@ const AuthorTitle = styled.h4`
   width: 100%;
 `;
 
+const Image = styled.img`
+  padding: 0 5%;
+  width: 100%;
+  box-sizing: border-box;
+`;
+
 const Title = ({title}) => {
-	return (<TitlePost>{title}</TitlePost>)
+	return (<TitlePost>{title}</TitlePost>);
 };
 
 const Body = ({body}) => {
-	return (<Paragraph>{body}</Paragraph>)
+	return (<Paragraph>{body}</Paragraph>);
 };
 
 const Author = ({author}) => {
-	return (<AuthorTitle>Author: {author}</AuthorTitle>)
+	return (<AuthorTitle>Author: {author}</AuthorTitle>);
 };
 
 const CommentList = ({comments}) => {
@@ -74,18 +79,21 @@ class Post extends Component {
 		return (
 			<div className={'post-list__wrapper '}>
 				<PostWrapper>
-				<Title title={this.props.post.title}/>
-				<Body body={this.props.post.body}/>
-				<Author author={this.props.post.author}/>
-				<div>
+					<Title title={this.props.post.title}/>
 					{
-						this.props.comments && <CommentList comments={this.props.comments}/>
+						this.props.post.files && <Image src={this.props.post.files.base64}/>
 					}
-				</div>
-				<CreateComment idPost={this.props.match.params.id}/>
+					<Body body={this.props.post.body}/>
+					<Author author={this.props.post.author}/>
+					<div>
+						{
+							this.props.comments && <CommentList comments={this.props.comments}/>
+						}
+					</div>
+					<CreateComment idPost={this.props.match.params.id}/>
 				</PostWrapper>
 			</div>
-		)
+		);
 	}
 }
 
@@ -93,7 +101,7 @@ const mapStateToProps = state => {
 	return {
 		post: state.post.post,
 		comments: state.post.post.comments
-	}
+	};
 };
 
 const mapDispatchToProps = {

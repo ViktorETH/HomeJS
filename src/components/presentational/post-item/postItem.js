@@ -1,48 +1,48 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import styled from 'styled-components';
+import { withStyles } from '@material-ui/core/styles';
+import {GridListTile, GridListTileBar} from '@material-ui/core';
 
-const PostWrapper = styled.div`
-  margin: 2% 0;
-  width: 26%;
-  height: 500px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 1px 1px 20px 1px #F5F5F5;
-  overflow: hidden;
-`;
+const styles = theme => ({
+	postItem: {
+		width: 450,
+		height: 300,
+		margin: '3% 0',
+		fontSize: 0,
+		border: '1px solid black',
+		boxShadow: ' 0 0 50px 0 black',
+		transition: '1s',
+		'&:hover': {
+			transform: 'scale(1.05)',
+			boxShadow: '0 0 2px 0 #46247D'
+		},
+	},
+	postTitle: {
+		width: '100%',
+		height: 60,
+	},
+	icon: {
+		color: 'rgba(255, 255, 255, 0.54)',
+	},
+});
 
-const Paragraph = styled.p`
-  text-align: justify;
-  padding: 1% 5%;
-  height: 310px;
-  overflow: hidden;
-`;
-
-const Title = styled.h2`
-	margin-left: 5%;
-  padding: 0 5%;
-  width: 100%;
-`;
-
-const Author = styled.h4`
-	margin-left: 5%;
-  padding: 0 5%;
-  width: 100%;
-`;
-
-const Post = ({post}) => {
-	return (
-		<PostWrapper>
+class Post extends Component {
+	render () {
+		const {post, classes} = this.props;
+		return (
 			<Link to={`/posts/${post.id}`}>
-				<Title>{post.title}</Title>
+			<GridListTile
+			className={classes.postItem}>
+				<img src={post.files.base64} alt={post.title} />
+				<GridListTileBar
+					className={classes.postTitle}
+					title={post.title}
+					subtitle={<span>by: {post.author}</span>}
+				/>
+			</GridListTile>
 			</Link>
-			<Paragraph>{post.body}</Paragraph>
-			<div>
-				<Author>Author: {post.author}</Author>
-			</div>
-		</PostWrapper>
-	)
-};
+		)
+	}
+}
 
-export default Post;
+export default withStyles(styles)(Post);

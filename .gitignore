@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 /blog_api/node_modules
+/blog_api/.idea
+/.idea
