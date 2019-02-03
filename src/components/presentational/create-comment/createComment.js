@@ -1,36 +1,80 @@
 import React, {Component} from 'react';
 import { createComment } from '../../../api/comment';
-import styled from "styled-components";
-import {getPostById} from "../../../api/posts";
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
+import green from '@material-ui/core/colors/green';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import ErrorIcon from '@material-ui/icons/CheckCircle';
+import Snackbar from "@material-ui/core/Snackbar/Snackbar";
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from "@material-ui/core/IconButton/IconButton";
+import SnackbarContent from "@material-ui/core/SnackbarContent/SnackbarContent";
+import {TextField} from "@material-ui/core";
 
-const TextAtea = styled.textarea`
-	margin: 0 auto;
-  width: 100%;
-`;
+const variantIcon = {
+	success: CheckCircleIcon,
+	error: ErrorIcon,
+};
 
-const Form = styled.form`
-	margin: 5%;
-  width: 50%;
-`;
+const styles = theme => ({
+	button: {
+		margin: '2% 0'
+	},
+	success: {
+		marginTop: '1%',
+		backgroundColor: green[600],
+	},
+	error: {
+		backgroundColor: theme.palette.error.dark,
+	},
+	iconVariant: {
+		opacity: 0.9,
+		marginRight: theme.spacing.unit,
+	},
+	form: {
+		marginLeft: '5%',
+		width: '60%'
+	}
+});
 
-const Button = styled.button`
-	margin: 0 auto;
-  width: 50%;
-  display: inline-block;
-  color: #40E0D0;
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid #4682B4;
-  border-radius: 3px;
-  display: block;
-`;
+const MySnackbarContent = (props) => {
+	const { classes, className, message, onClose, variant, ...other } = props;
+	const Icon = variantIcon[variant];
+
+	return (
+		<SnackbarContent
+			className={classNames(classes[variant], className)}
+			aria-describedby="client-snackbar"
+			message={
+				<span id="client-snackbar" className={classes.message}>
+          <Icon className={classNames(classes.icon, classes.iconVariant)} />
+					{message}
+        </span>
+			}
+			action={[
+				<IconButton
+					key="close"
+					aria-label="Close"
+					color="inherit"
+					className={classes.close}
+					onClick={onClose}>
+					<CloseIcon className={classes.icon} />
+				</IconButton>,
+			]}
+			{...other}
+		/>
+	);
+};
+
+const MySnackbarContentWrapper = withStyles(styles)(MySnackbarContent);
 
 class CreateComment extends Component {
 	state = {
 		postId: '',
 		body: '',
-		date: new Date()
+		date: new Date(),
+		openPopup: false,
 	};
 
 	componentDidMount () {
@@ -46,26 +90,58 @@ class CreateComment extends Component {
 	handleSubmit = (event) => {
 		event.preventDefault();
 		createComment(this.state)
-			.then(res => console.log(res))
-			.then(() => getPostById(this.state.postId))
+			.then(() => this.handleOpenPopup())
 			.catch(err => console.log(err));
 		this.setState({
-			body: '',
+			body: ''
 		});
 	};
 
+	handleOpenPopup = () => {
+		this.setState({ openPopup: true });
+	};
+
+	handleClosePopup = () => {
+		this.setState({ openPopup: false });
+	};
+
 	render () {
+		const { classes } = this.props;
 		return (
-			<Form onSubmit={this.handleSubmit}>
-				<label>
-					New Comment:
-					<TextAtea rows="10" type="text" value={this.state.body} onChange={this.handleChangeBody}/>
-				</label>
+			<form className={classes.form} onSubmit={this.handleSubmit}>
+				<Snackbar
+					anchorOrigin={{
+						vertical: 'top',
+						horizontal: 'center',
+					}}
+					open={this.state.openPopup}
+					autoHideDuration={2000}
+					onClose={this.handleClosePopup}>
+					<MySnackbarContentWrapper
+						onClose={this.handleClosePopup}
+						variant="success"
+						message="Success"/>
+				</Snackbar>
+				<TextField
+					id="post"
+					label="Post"
+					className={classes.textField}
+					multiline={true}
+					required={true}
+					rows="5"
+					value={this.state.body}
+					fullWidth
+					onChange={this.handleChangeBody}/>
 				<br/>
-				<Button type="submit" onSubmit={this.handleSubmit}>Send</Button>
-			</Form>
+				<Button
+					variant="outlined"
+					color="primary"
+					type="submit"
+					className={classes.button}
+					onSubmit={this.handleSubmit}>Send</Button>
+			</form>
 		);
 	}
 }
 
-export default CreateComment;
+export default withStyles(styles)(CreateComment);

@@ -31,7 +31,7 @@ const LinkItem = styled.a`
 	font-size: 1.5em;
   font-weight: bold;
   margin-left: 5%;
-  color: #FFF
+  color: #FFF;
   :hover {
     color: #3A3B45;
   }

@@ -146,6 +146,7 @@ class CreatePost extends Component {
 				<TitlePost>Create post</TitlePost>
 				<form className={classes.container} onSubmit={this.handleSubmit}>
 					<FileBase64
+						className={classes.download}
 						multiple={ false }
 						onDone={ this.handleLoadFiles } />
 					<div>
@@ -168,7 +169,7 @@ class CreatePost extends Component {
 							inputProps={{ name: 'category' }}>
 							{
 								this.state.categories.map(category => (
-									<MenuItem value={category}>{category}</MenuItem>
+									<MenuItem value={category} key={category}>{category}</MenuItem>
 								))
 							}
 						</Select>
