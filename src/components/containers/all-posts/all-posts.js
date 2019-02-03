@@ -6,8 +6,8 @@ import {getAllPosts} from "../../../helpers/selectors";
 import {Grid} from '@material-ui/core';
 
 const styles = {
-	'background-image': 'linear-gradient(to right, black, #2A3340, black)',
-	'min-height': '100vh'
+	'backgroundImage': 'linear-gradient(to right, black, #2A3340, black)',
+	'minHeight': '100vh'
 };
 
 const PostsList = ({posts}) => {

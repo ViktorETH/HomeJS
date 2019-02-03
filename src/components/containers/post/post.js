@@ -4,6 +4,7 @@ import {fetchPostItem} from '../../../actions/postItem';
 import Comment from '../../presentational/comment/comment';
 import CreateComment from '../../presentational/create-comment/createComment';
 import styled from "styled-components";
+import ListItemText from '@material-ui/core/ListItemText';
 
 const PostWrapper = styled.div`
 	width: 70%;
@@ -20,22 +21,16 @@ const TitlePost = styled.h2`
 `;
 
 const TitleComments = styled.div`
-  font-size: 2em;
+  font-size: 1.5em;
   margin-left: 5%;
   color: #3a3a3a;
 `;
 
 const Paragraph = styled.p`
   text-align: justify;
-  padding: 1% 5%;
-  font-size: 1.5em;
-  overflow: hidden;
-`;
-
-const AuthorTitle = styled.h4`
-	margin-left: 5%;
   padding: 0 5%;
-  width: 100%;
+  font-size: 1.5em;
+  margin-bottom: 0
 `;
 
 const Image = styled.img`
@@ -44,16 +39,25 @@ const Image = styled.img`
   box-sizing: border-box;
 `;
 
-const Title = ({title}) => {
-	return (<TitlePost>{title}</TitlePost>);
-};
+const PostInfoWrapper = styled.div`
+	display: flex;
+	flex-direction: row;
+	margin-left: 5%;
+	margin-bottom: 2%;
+	width: 100%;
+	:last-child: {
+		background-color: red;
+	}
+`;
 
-const Body = ({body}) => {
-	return (<Paragraph>{body}</Paragraph>);
-};
-
-const Author = ({author}) => {
-	return (<AuthorTitle>Author: {author}</AuthorTitle>);
+const PostInfo = ({info}) => {
+	return (
+		<PostInfoWrapper>
+			<ListItemText primary={`by: ${info.author}`}/>
+			<ListItemText primary={`category: ${info.category}`}/>
+			<ListItemText primary={`${new Date(info.date).toDateString()}`}/>
+		</PostInfoWrapper>
+	)
 };
 
 const CommentList = ({comments}) => {
@@ -62,7 +66,7 @@ const CommentList = ({comments}) => {
 	);
 	return (
 		<div>
-			<TitleComments>Comments</TitleComments>
+			<TitleComments>Comments:</TitleComments>
 			<div>{list}</div>
 		</div>
 
@@ -76,15 +80,16 @@ class Post extends Component {
 	}
 
 	render () {
+		const {title, files, body, author, category, date} = this.props.post;
 		return (
 			<div className={'post-list__wrapper '}>
 				<PostWrapper>
-					<Title title={this.props.post.title}/>
+					<TitlePost>{title}</TitlePost>
 					{
-						this.props.post.files && <Image src={this.props.post.files.base64}/>
+						files && <Image src={files.base64}/>
 					}
-					<Body body={this.props.post.body}/>
-					<Author author={this.props.post.author}/>
+					<Paragraph>{body}</Paragraph>
+					<PostInfo info={{author, category, date}}/>
 					<div>
 						{
 							this.props.comments && <CommentList comments={this.props.comments}/>
